@@ -3,7 +3,7 @@ Groovy library for creating graphs based on TableMatrix or [][] data
 
 add the following dependency to your gradle build script
 ```groovy
-implementation 'se.alipsa.groovy:charts:1.0.0-SNAPSHOT'`
+implementation 'se.alipsa.groovy:charts:1.0.0-SNAPSHOT'
 ```
 
 ... or maven pom.xml
