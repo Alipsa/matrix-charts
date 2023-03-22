@@ -1,2 +1,2 @@
-# matrix-plot
+# Charts
 Groovy library for creating graphs based on TableMatrix or [][] data
