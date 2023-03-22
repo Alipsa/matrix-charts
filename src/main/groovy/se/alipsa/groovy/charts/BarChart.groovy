@@ -7,34 +7,34 @@ class BarChart extends Chart {
   protected ChartType chartType = ChartType.NONE
   private ChartDirection direction
 
-  public ChartType getChartType() {
-    return chartType;
+  ChartType getChartType() {
+    return chartType
   }
 
-  public ChartDirection getDirection() {
-    return direction;
+  ChartDirection getDirection() {
+    return direction
   }
 
-  public static BarChart create(String title, ChartType chartType, ChartDirection direction, List<?> groupColumn, List<?>... valueColumn) {
-    BarChart chart = new BarChart();
-    chart.title = title;
-    chart.categorySeries = groupColumn;
-    chart.valueSeries = valueColumn;
-    chart.chartType = chartType;
-    chart.direction = direction;
-    return chart;
+  static BarChart create(String title, ChartType chartType, ChartDirection direction, List<?> groupColumn, List<?>... valueColumn) {
+    BarChart chart = new BarChart()
+    chart.title = title
+    chart.categorySeries = groupColumn
+    chart.valueSeries = valueColumn
+    chart.chartType = chartType
+    chart.direction = direction
+    return chart
   }
 
-  public static BarChart create(String title, ChartType chartType, TableMatrix data, String categoryColumnName, ChartDirection direction, String... valueColumn) {
-    List<?> groupColumn = data.column(categoryColumnName);
+  static BarChart create(String title, ChartType chartType, TableMatrix data, String categoryColumnName, ChartDirection direction, String... valueColumn) {
+    List<?> groupColumn = data.column(categoryColumnName)
     List<?>[] valueColumns = data.columns(valueColumn.toList()) as List<?>[]
-    BarChart chart = new BarChart();
-    chart.title = title;
-    chart.categorySeries = groupColumn;
-    chart.valueSeries = valueColumns;
-    chart.chartType = chartType;
-    chart.direction = direction;
-    return chart;
+    BarChart chart = new BarChart()
+    chart.title = title
+    chart.categorySeries = groupColumn
+    chart.valueSeries = valueColumns
+    chart.chartType = chartType
+    chart.direction = direction
+    return chart
   }
 
   /**
@@ -48,8 +48,8 @@ class BarChart extends Chart {
    *     "Sum [Fatalities]",
    *   )
    */
-  public static BarChart createHorizontal(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
-    return create(title, chartType, data, categoryColumnName, ChartDirection.HORIZONTAL, valueColumn);
+  static BarChart createHorizontal(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
+    return create(title, chartType, data, categoryColumnName, ChartDirection.HORIZONTAL, valueColumn)
   }
 
   /**
@@ -63,7 +63,7 @@ class BarChart extends Chart {
    *     "Sum [Fatalities]",
    *   )
    */
-  public static BarChart createVertical(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
-    return create(title, chartType, data, categoryColumnName, ChartDirection.VERTICAL, valueColumn);
+  static BarChart createVertical(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
+    return create(title, chartType, data, categoryColumnName, ChartDirection.VERTICAL, valueColumn)
   }
 }

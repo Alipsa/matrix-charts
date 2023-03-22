@@ -15,36 +15,36 @@ class Plot {
   }
 
   static void pdf(Chart chart, OutputStream os) {
-    throw new RuntimeException("Not yet implemented");
+    throw new RuntimeException("Not yet implemented")
   }
 
   static void svg(Chart chart, File file) throws IOException {
     try(OutputStream os = Files.newOutputStream(file.toPath())) {
-      svg(chart, os);
+      svg(chart, os)
     }
   }
 
   static void svg(Chart chart, OutputStream os) {
-    throw new RuntimeException("Not yet implemented");
+    throw new RuntimeException("Not yet implemented")
   }
 
   static void png(Chart chart, File file) throws IOException {
     try(OutputStream os = Files.newOutputStream(file.toPath())) {
-      png(chart, os);
+      png(chart, os)
     }
   }
 
-  void png(Chart chart, OutputStream os) {
-    throw new RuntimeException("Not yet implemented");
+  static void png(Chart chart, OutputStream os) {
+    throw new RuntimeException("Not yet implemented")
   }
 
   static javafx.scene.chart.Chart jfx(Chart chart) {
     if (chart instanceof AreaChart) {
-      return JfxAreaChartConverter.convert((AreaChart) chart);
+      return JfxAreaChartConverter.convert((AreaChart) chart)
     } else if (chart instanceof BarChart) {
-      return JfxBarChartConverter.convert((BarChart) chart);
+      return JfxBarChartConverter.convert((BarChart) chart)
     } else if (chart instanceof PieChart) {
-      return JfxPieChartConverter.convert((PieChart) chart);
+      return JfxPieChartConverter.convert((PieChart) chart)
     }
     throw new RuntimeException(chart.getClass().getSimpleName() + " conversion is not yet implemented")
   }

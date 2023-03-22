@@ -1,6 +1,7 @@
 package se.alipsa.groovy.charts.jfx;
 
-import javafx.scene.chart.*;
+import javafx.scene.chart.*
+import se.alipsa.groovy.matrix.ValueConverter;
 
 class JfxPieChartConverter {
 
@@ -12,10 +13,10 @@ class JfxPieChartConverter {
     var values = chart.getValueSeries()[0]
     var data = fxChart.getData()
     for (int i = 0; i < categories.size(); i++) {
-      data.add(new PieChart.Data(String.valueOf(categories.get(i)), Double.parseDouble(values.getString(i))))
+      data.add(new PieChart.Data(String.valueOf(categories[i]), ValueConverter.toDouble(values[i])))
     }
 
-    fxChart.setTitle(chart.getTitle());
-    return fxChart;
+    fxChart.setTitle(chart.getTitle())
+    return fxChart
   }
 }

@@ -14,10 +14,10 @@ class PieChart extends Chart {
   }
 
   static PieChart create(TableMatrix table, String groupColName, String numberColName){
-    return create(table.name(), table, groupColName, numberColName);
+    return create(table.name(), table, groupColName, numberColName)
   }
 
   static PieChart create(String title, TableMatrix table, String groupColName, String numberColName){
-    return create(title, table.column(groupColName), table.column(numberColName));
+    return create(title, table.column(groupColName), table.column(numberColName))
   }
 }

@@ -11,67 +11,67 @@ import java.time.LocalTime;
  * a DOUBLE (numeric). This class makes this easy to do that.
  * TODO: maybe do something with dates
  */
-public class DataType {
+class DataType {
 
-  public static final String NUMERIC = "numeric";
-  public static final String CHARACTER = "character";
+  public static final String NUMERIC = "numeric"
+  public static final String CHARACTER = "character"
 
   static boolean equals(Class one, Class two) {
-    String oneType = dataType(one);
-    String twoType = dataType(two);
-    return oneType.equals(twoType);
+    String oneType = dataType(one)
+    String twoType = dataType(two)
+    return oneType.equals(twoType)
   }
 
   static boolean differs(Class one, Class two) {
-    return !equals(one, two);
+    return !equals(one, two)
   }
 
-  public static String dataType(Class columnType) {
+  static String dataType(Class columnType) {
     if (Number.isAssignableFrom(columnType)) {
       return NUMERIC
     }
     return CHARACTER
   }
 
-  public static boolean isCharacter(Class columnType) {
-    return CHARACTER.equals(dataType(columnType));
+  static boolean isCharacter(Class columnType) {
+    return CHARACTER.equals(dataType(columnType))
   }
 
 
   public static String sqlType(Class columnType, int... varcharSize) {
     if (Short == columnType) {
-      return "SMALLINT";
+      return "SMALLINT"
     }
     if (Integer == columnType) {
-      return "INTEGER";
+      return "INTEGER"
     }
     if (Long == columnType) {
-      return "BIGINT";
+      return "BIGINT"
     }
     if (Float == columnType) {
-      return "REAL";
+      return "REAL"
     }
     if (Boolean == columnType) {
-      return "BIT";
+      return "BIT"
     }
     if (String == columnType) {
-      return "VARCHAR(" + (varcharSize.length > 0 ? varcharSize[0] : 8000) + ")";
+      return "VARCHAR(" + (varcharSize.length > 0 ? varcharSize[0] : 8000) + ")"
     }
     if (Double == columnType) {
-      return "DOUBLE";
+      return "DOUBLE"
     }
     if (LocalDate == columnType) {
-      return "DATE";
+      return "DATE"
     }
     if(LocalTime == columnType) {
-      return "TIME";
+      return "TIME"
     }
     if (LocalDateTime == columnType) {
-      return "TIMESTAMP";
+      return "TIMESTAMP"
     }
     if (Instant == columnType) {
-      return "TIMESTAMP";
+      return "TIMESTAMP"
     }
-    return "BLOB";
+    return "BLOB"
   }
 }

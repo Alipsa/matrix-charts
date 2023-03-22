@@ -34,6 +34,6 @@ class JfxBarChartConverter {
     fxChart.setTitle(chart.getTitle())
 
 
-    return fxChart;
+    return fxChart
   }
 }

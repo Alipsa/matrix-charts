@@ -5,18 +5,18 @@ import se.alipsa.groovy.matrix.TableMatrix;
 
 class AreaChart extends Chart {
 
-  public static AreaChart create(TableMatrix data) {
+  static AreaChart create(TableMatrix data) {
     if (data.columnCount() != 2) {
       throw new IllegalArgumentException("Table " + data.name() + " does not contain 2 columns.")
     }
-    AreaChart chart = new AreaChart();
+    AreaChart chart = new AreaChart()
     chart.title = data.name()
     chart.categorySeries = data.column(0)
     chart.valueSeries = data.rejectColumns(0).columnArray()
     return chart
   }
 
-  public static AreaChart create(String title, List<?> groupColumn, List<?>... valueColumn) {
+  static AreaChart create(String title, List<?> groupColumn, List<?>... valueColumn) {
     AreaChart chart = new AreaChart()
     chart.title = title
     chart.categorySeries = groupColumn
@@ -28,7 +28,7 @@ class AreaChart extends Chart {
    * AreaPlot.create(
    *         "Boston Robberies by month: Jan 1966-Oct 1975", robberies, "Record", "Robberies")
    */
-  public static AreaChart create(String title, TableMatrix data, String xCol, String yCol) {
+  static AreaChart create(String title, TableMatrix data, String xCol, String yCol) {
     var xColumn = data.column(xCol)
     var yColumn = data.column(yCol)
     return create(title, xColumn, yColumn)
@@ -37,7 +37,7 @@ class AreaChart extends Chart {
   /**
    * TODO: figure out how groupCol works
    */
-  public static AreaChart create(String title, TableMatrix data, String xCol, String yCol, String groupCol) {
+  static AreaChart create(String title, TableMatrix data, String xCol, String yCol, String groupCol) {
     throw new RuntimeException("Not yet implemented")
   }
 }
