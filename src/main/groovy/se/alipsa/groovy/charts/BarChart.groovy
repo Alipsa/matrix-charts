@@ -1,12 +1,11 @@
-package se.alipsa.groovy.matrixplot;
+package se.alipsa.groovy.charts
 
-import tech.tablesaw.api.Table;
-import tech.tablesaw.columns.Column;
+import se.alipsa.groovy.matrix.TableMatrix;
 
-public class BarChart extends Chart {
+class BarChart extends Chart {
 
-  protected ChartType chartType = ChartType.NONE;
-  private ChartDirection direction;
+  protected ChartType chartType = ChartType.NONE
+  private ChartDirection direction
 
   public ChartType getChartType() {
     return chartType;
@@ -16,7 +15,7 @@ public class BarChart extends Chart {
     return direction;
   }
 
-  public static BarChart create(String title, ChartType chartType, ChartDirection direction, Column<?> groupColumn, Column<?>... valueColumn) {
+  public static BarChart create(String title, ChartType chartType, ChartDirection direction, List<?> groupColumn, List<?>... valueColumn) {
     BarChart chart = new BarChart();
     chart.title = title;
     chart.categorySeries = groupColumn;
@@ -26,9 +25,9 @@ public class BarChart extends Chart {
     return chart;
   }
 
-  public static BarChart create(String title, ChartType chartType, Table data, String categoryColumnName, ChartDirection direction, String... valueColumn) {
-    Column<?> groupColumn = data.column(categoryColumnName);
-    Column<?>[] valueColumns = data.selectColumns(valueColumn).columnArray();
+  public static BarChart create(String title, ChartType chartType, TableMatrix data, String categoryColumnName, ChartDirection direction, String... valueColumn) {
+    List<?> groupColumn = data.column(categoryColumnName);
+    List<?>[] valueColumns = data.columns(valueColumn.toList()) as List<?>[]
     BarChart chart = new BarChart();
     chart.title = title;
     chart.categorySeries = groupColumn;
@@ -49,7 +48,7 @@ public class BarChart extends Chart {
    *     "Sum [Fatalities]",
    *   )
    */
-  public static BarChart createHorizontal(String title, Table data, String categoryColumnName, ChartType chartType, String... valueColumn) {
+  public static BarChart createHorizontal(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
     return create(title, chartType, data, categoryColumnName, ChartDirection.HORIZONTAL, valueColumn);
   }
 
@@ -64,7 +63,7 @@ public class BarChart extends Chart {
    *     "Sum [Fatalities]",
    *   )
    */
-  public static BarChart createVertical(String title, Table data, String categoryColumnName, ChartType chartType, String... valueColumn) {
+  public static BarChart createVertical(String title, TableMatrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
     return create(title, chartType, data, categoryColumnName, ChartDirection.VERTICAL, valueColumn);
   }
 }

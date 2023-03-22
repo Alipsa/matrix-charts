@@ -1,8 +1,6 @@
-package se.alipsa.groovy.matrixplot;
+package se.alipsa.groovy.charts
 
-import tech.tablesaw.api.ColumnType;
-import tech.tablesaw.api.Table;
-import tech.tablesaw.columns.Column;
+import se.alipsa.groovy.matrix.TableMatrix;
 
 /**
  * Represents a chart in some form.
@@ -16,35 +14,35 @@ public abstract class Chart {
 
   protected String title;
 
-  protected Column<?> categorySeries;
-  protected Column<?>[] valueSeries;
+  protected List<?> categorySeries;
+  protected List<?>[] valueSeries;
 
   public String getTitle() {
     return title;
   }
 
-  public Column<?> getCategorySeries() {
+  public List<?> getCategorySeries() {
     return categorySeries;
   }
 
-  public Column<?>[] getValueSeries() {
+  public List<?>[] getValueSeries() {
     return valueSeries;
   }
 
-  static void validateSeries(Table[] series) {
+  static void validateSeries(TableMatrix[] series) {
     int idx = 0;
     if (series == null || series.length == 0) {
       throw new IllegalArgumentException("The series contains no data");
     }
 
-    Table firstTable = series[0];
-    ColumnType firstColumn = firstTable.typeArray()[0];
-    ColumnType secondColumn = firstTable.typeArray()[1];
+    TableMatrix firstTable = series[0];
+    Class firstColumn = firstTable.columnType(0)
+    Class secondColumn = firstTable.columnType(1)
     if (firstTable.columnCount() != 2) {
       throw new IllegalArgumentException("Table " + idx + "(" + firstTable.name() + ") does not contain 2 columns.");
     }
 
-    for (var table : series) {
+    for (table in series) {
       if (idx == 0) {
         idx++;
         continue;
@@ -52,8 +50,8 @@ public abstract class Chart {
       if (table.columnCount() != 2) {
         throw new IllegalArgumentException("Table " + idx + "(" + table.name() + ") does not contain 2 columns.");
       }
-      ColumnType col0Type = table.typeArray()[0];
-      ColumnType col1Type = table.typeArray()[1];
+      Class col0Type = table.columnType(0)
+      Class col1Type = table.columnType(1)
       if (DataType.differs(firstColumn, col0Type)) {
         throw new IllegalArgumentException("Column mismatch in series " + idx + "(" + table.name()
             + "). First series has type " + firstColumn.name() + " in the first column but this series has " + col0Type);
