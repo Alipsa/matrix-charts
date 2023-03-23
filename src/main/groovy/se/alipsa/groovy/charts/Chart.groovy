@@ -12,7 +12,9 @@ import se.alipsa.groovy.matrix.TableMatrix;
  */
 abstract class Chart {
 
-  protected String title;
+  protected String title
+  protected String xAxisTitle = ""
+  protected String yAxisTitle = ""
 
   protected List<?> categorySeries;
   protected List<?>[] valueSeries;
@@ -62,6 +64,14 @@ abstract class Chart {
       }
       idx++
     }
+  }
+
+  String getxAxisTitle() {
+    return xAxisTitle
+  }
+
+  String getyAxisTitle() {
+    return yAxisTitle
   }
 
   @Override
