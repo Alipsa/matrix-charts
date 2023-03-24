@@ -23,7 +23,7 @@ tasks.withType(JavaCompile) {
 
 javafx {
   version = "19.0.2.1"
-  modules = ['javafx.controls']
+  modules = ['javafx.controls', 'javafx.swing']
 }
 
 dependencies {
@@ -31,8 +31,6 @@ dependencies {
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
   compileOnly groovy
   implementation("se.alipsa.groovy:matrix:1.0.2-SNAPSHOT")
-  // Temporary solution until g3plot is working, https://github.com/knowm/XChart
-  implementation 'org.knowm.xchart:xchart:3.8.3'
   testImplementation groovy
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'

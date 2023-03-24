@@ -8,7 +8,7 @@ import se.alipsa.groovy.charts.*
 import static org.junit.jupiter.api.Assertions.*
 import static se.alipsa.groovy.matrix.ListConverter.*
 
-class PdfTest {
+class PngTest {
 
     def empData = TableMatrix.create(
             emp_id: 1..5,
@@ -23,7 +23,20 @@ class PdfTest {
         def file = File.createTempFile("barchart", ".png")
         BarChart chart = BarChart.createVertical("Salaries", empData, "emp_name", ChartType.NONE, "salary")
         try {
-            Plot.png(chart, file)
+            Plot.png(chart, file, 600, 400)
+            println("Wrote $file")
+            assertTrue(file.exists())
+        } catch (UnsatisfiedLinkError e) {
+            println "No graphics environment available: $e, skipping test"
+        }
+    }
+
+    @Test
+    void testAreaChartToPng() {
+        def file = File.createTempFile("areaChart", ".png")
+        AreaChart chart = AreaChart.create("Salaries", empData, "emp_name", "salary")
+        try {
+            Plot.png(chart, file, 1024, 768)
             println("Wrote $file")
             assertTrue(file.exists())
         } catch (UnsatisfiedLinkError e) {
