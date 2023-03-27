@@ -9,13 +9,17 @@ import java.nio.file.Files;
 class Plot {
 
   static void svg(Chart chart, File file) throws IOException {
-    try(OutputStream os = Files.newOutputStream(file.toPath())) {
+    try(BufferedWriter os = Files.newBufferedWriter(file.toPath())) {
       svg(chart, os)
     }
   }
 
-  static void svg(Chart chart, OutputStream os) {
+  static void svg(Chart chart, BufferedWriter os) {
     SvgConverter.convert(chart, os)
+  }
+
+  static void svg(Chart chart, OutputStream os) {
+    SvgConverter.convert(chart, new BufferedWriter(new OutputStreamWriter(os)))
   }
 
   static void png(Chart chart, File file, double width, double height) throws IOException {
