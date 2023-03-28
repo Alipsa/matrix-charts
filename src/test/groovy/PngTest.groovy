@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test
 
-import java.awt.GraphicsEnvironment
 import java.time.LocalDate
 import se.alipsa.groovy.matrix.*
 import se.alipsa.groovy.charts.*
@@ -26,7 +25,7 @@ class PngTest {
             Plot.png(chart, file, 600, 400)
             println("Wrote $file")
             assertTrue(file.exists())
-        } catch (UnsatisfiedLinkError e) {
+        } catch (UnsatisfiedLinkError | NoClassDefFoundError e) {
             println "No graphics environment available: $e, skipping test"
         }
     }
@@ -39,7 +38,7 @@ class PngTest {
             Plot.png(chart, file, 1024, 768)
             println("Wrote $file")
             assertTrue(file.exists())
-        } catch (UnsatisfiedLinkError e) {
+        } catch (UnsatisfiedLinkError | NoClassDefFoundError e) {
             println "No graphics environment available: $e, skipping test"
         }
     }

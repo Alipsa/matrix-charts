@@ -31,7 +31,6 @@ dependencies {
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
   compileOnly groovy
   implementation("se.alipsa.groovy:matrix:1.0.2-SNAPSHOT")
-  implementation("se.alipsa:jfxconverter-svg:1.0-SNAPSHOT")
   testImplementation groovy
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
