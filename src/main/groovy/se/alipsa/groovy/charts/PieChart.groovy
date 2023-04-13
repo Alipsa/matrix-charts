@@ -1,6 +1,6 @@
 package se.alipsa.groovy.charts
 
-import se.alipsa.groovy.matrix.TableMatrix;
+import se.alipsa.groovy.matrix.Matrix;
 
 
 class PieChart extends Chart {
@@ -13,11 +13,11 @@ class PieChart extends Chart {
     return chart
   }
 
-  static PieChart create(TableMatrix table, String groupColName, String numberColName){
-    return create(table.name(), table, groupColName, numberColName)
+  static PieChart create(Matrix table, String groupColName, String numberColName){
+    return create(table.name, table, groupColName, numberColName)
   }
 
-  static PieChart create(String title, TableMatrix table, String groupColName, String numberColName){
+  static PieChart create(String title, Matrix table, String groupColName, String numberColName){
     return create(title, table.column(groupColName), table.column(numberColName))
   }
 }

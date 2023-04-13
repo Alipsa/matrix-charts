@@ -13,7 +13,7 @@ class JfxBarChartConverter {
 
     XYChart<?,?> fxChart
     if (ChartType.STACKED == chart.getChartType()) {
-      if (ChartDirection.HORIZONTAL.equals(chart.getDirection())) {
+      if (ChartDirection.HORIZONTAL == chart.getDirection()) {
         //xAxis.setTickLabelRotation(90); TODO: make this a styling option
         fxChart = new StackedBarChart<>(yAxis, xAxis)
         ConverterUtil.populateHorizontalSeries(fxChart, chart)
@@ -22,7 +22,7 @@ class JfxBarChartConverter {
         ConverterUtil.populateVerticalSeries(fxChart, chart)
       }
     } else {
-      if (ChartDirection.HORIZONTAL.equals(chart.getDirection())) {
+      if (ChartDirection.HORIZONTAL == chart.getDirection()) {
         //xAxis.setTickLabelRotation(90); // TODO: make this a styling option
         fxChart = new BarChart<>(yAxis, xAxis)
         ConverterUtil.populateHorizontalSeries(fxChart, chart)

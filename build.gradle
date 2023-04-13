@@ -21,6 +21,8 @@ tasks.withType(JavaCompile) {
   options.release = 11
 }
 
+// we should consider using monocle to allow this to work for back-end headless apps:
+// https://wiki.openjdk.org/display/OpenJFX/Monocle
 javafx {
   version = "19.0.2.1"
   modules = ['javafx.controls', 'javafx.swing']
@@ -30,7 +32,7 @@ dependencies {
   def groovyVersion = '4.0.10'
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
   compileOnly groovy
-  implementation("se.alipsa.groovy:matrix:1.0.2-SNAPSHOT")
+  implementation("se.alipsa.groovy:matrix:1.1.0-SNAPSHOT")
   testImplementation groovy
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
