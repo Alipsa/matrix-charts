@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
 import java.time.LocalDate
@@ -8,6 +9,17 @@ import static org.junit.jupiter.api.Assertions.*
 import static se.alipsa.groovy.matrix.ListConverter.*
 
 class PngTest {
+
+    @BeforeAll
+    static void init() {
+        if (Boolean.getBoolean("headless")) {
+            println("Enable monocle for headless testing")
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+        }
+    }
 
     def empData = TableMatrix.create(
             emp_id: 1..5,

@@ -1,6 +1,5 @@
 package se.alipsa.groovy.charts.png
 
-import com.sun.javafx.tk.Toolkit
 import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
 import javafx.embed.swing.SwingFXUtils

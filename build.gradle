@@ -1,7 +1,9 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
   id 'groovy'
   id 'java-library'
-  id 'org.openjfx.javafxplugin' version '0.0.13'
+  //id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'signing'
   id 'maven-publish'
   id('io.github.gradle-nexus.publish-plugin') version '1.3.0'
@@ -17,28 +19,59 @@ repositories {
   mavenCentral()
 }
 
-tasks.withType(JavaCompile) {
-  options.release = 11
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(11)
+  }
 }
 
+/*
+this makes the javafx dependencies added to the pom
 javafx {
   version = "19.0.2.1"
   modules = ['javafx.controls', 'javafx.swing']
 }
+ */
 
 dependencies {
+  OperatingSystem os = OperatingSystem.current()
+
+  def qualifier = 'unknown'
+  if (os.isLinux()) {
+    qualifier='linux'
+  } else if (os.isWindows()) {
+    qualifier = 'win'
+  } else if (os.isMacOsX()) {
+    qualifier = 'mac'
+  }
+  def javaFxVersion = '19.0.2.1'
   def groovyVersion = '4.0.10'
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
+  // compile only dependencies are not included in the pom
   compileOnly groovy
+  compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:$qualifier"
+  compileOnly "org.openjfx:javafx-base:${javaFxVersion}:$qualifier"
+  compileOnly "org.openjfx:javafx-controls:${javaFxVersion}:$qualifier"
+  compileOnly "org.openjfx:javafx-swing:${javaFxVersion}:$qualifier"
+
   implementation("se.alipsa.groovy:matrix:1.0.2-SNAPSHOT")
   testImplementation groovy
+  testImplementation "org.testfx:openjfx-monocle:jdk-11+26"
+
+  testImplementation "org.openjfx:javafx-graphics:${javaFxVersion}:$qualifier"
+  testImplementation "org.openjfx:javafx-base:${javaFxVersion}:$qualifier"
+  testImplementation "org.openjfx:javafx-controls:${javaFxVersion}:$qualifier"
+  testImplementation "org.openjfx:javafx-swing:${javaFxVersion}:$qualifier"
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
   testImplementation "org.apache.groovy:groovy-sql:$groovyVersion"
+  testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
 }
 
 test {
   testLogging.showStandardStreams = true
+  // run using gradle -Pheadless=true test
+  jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : false}"
   useJUnitPlatform()
 }
 
