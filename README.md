@@ -1,5 +1,5 @@
 # Charts
-Groovy library for creating graphs based on TableMatrix or [][] data
+Groovy library for creating graphs based on Matrix or [][] data
 
 add the following dependency to your gradle build script
 ```groovy
@@ -22,7 +22,7 @@ import java.time.LocalDate
 import se.alipsa.groovy.matrix.*
 import se.alipsa.groovy.charts.*
 
-def empData = TableMatrix.create(
+def empData = Matrix.create(
     emp_id: 1..5,
     emp_name: ["Rick","Dan","Michelle","Ryan","Gary"],
     salary: [623.3,515.2,611.0,729.0,843.25],

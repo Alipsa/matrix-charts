@@ -13,7 +13,7 @@ class JfxPieChartConverter {
     var values = chart.getValueSeries()[0]
     var data = fxChart.getData()
     for (int i = 0; i < categories.size(); i++) {
-      data.add(new PieChart.Data(String.valueOf(categories[i]), ValueConverter.toDouble(values[i])))
+      data.add(new PieChart.Data(String.valueOf(categories[i]), ValueConverter.asDouble(values[i])))
     }
 
     fxChart.setTitle(chart.getTitle())

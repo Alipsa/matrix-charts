@@ -25,6 +25,8 @@ java {
   }
 }
 
+// we should consider using monocle to allow this to work for back-end headless apps:
+// https://wiki.openjdk.org/display/OpenJFX/Monocle
 /*
 this makes the javafx dependencies added to the pom
 javafx {
@@ -49,6 +51,7 @@ dependencies {
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
   // compile only dependencies are not included in the pom
   compileOnly groovy
+  implementation("se.alipsa.groovy:matrix:1.1.0-SNAPSHOT")
   compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:$qualifier"
   compileOnly "org.openjfx:javafx-base:${javaFxVersion}:$qualifier"
   compileOnly "org.openjfx:javafx-controls:${javaFxVersion}:$qualifier"

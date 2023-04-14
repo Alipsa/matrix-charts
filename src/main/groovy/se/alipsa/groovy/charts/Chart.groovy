@@ -1,6 +1,6 @@
 package se.alipsa.groovy.charts
 
-import se.alipsa.groovy.matrix.TableMatrix;
+import se.alipsa.groovy.matrix.Matrix;
 
 /**
  * Represents a chart in some form.
@@ -31,17 +31,17 @@ abstract class Chart {
     return valueSeries;
   }
 
-  static void validateSeries(TableMatrix[] series) {
+  static void validateSeries(Matrix[] series) {
     int idx = 0
     if (series == null || series.length == 0) {
       throw new IllegalArgumentException("The series contains no data")
     }
 
-    TableMatrix firstTable = series[0]
+    Matrix firstTable = series[0]
     Class firstColumn = firstTable.columnType(0)
     Class secondColumn = firstTable.columnType(1)
     if (firstTable.columnCount() != 2) {
-      throw new IllegalArgumentException("Table " + idx + "(" + firstTable.name() + ") does not contain 2 columns.")
+      throw new IllegalArgumentException("Table " + idx + "(" + firstTable.name + ") does not contain 2 columns.")
     }
 
     for (table in series) {
@@ -50,7 +50,7 @@ abstract class Chart {
         continue
       }
       if (table.columnCount() != 2) {
-        throw new IllegalArgumentException("Table " + idx + "(" + table.name() + ") does not contain 2 columns.")
+        throw new IllegalArgumentException("Table " + idx + "(" + table.name + ") does not contain 2 columns.")
       }
       Class col0Type = table.columnType(0)
       Class col1Type = table.columnType(1)

@@ -1,10 +1,10 @@
 package se.alipsa.groovy.charts
 
-import se.alipsa.groovy.matrix.TableMatrix;
+import se.alipsa.groovy.matrix.Matrix;
 
 class BubbleChart {
 
-  static BubbleChart create(String title, TableMatrix table, String xCol, String yCol, String sizeColumn, String groupCol) {
+  static BubbleChart create(String title, Matrix table, String xCol, String yCol, String sizeColumn, String groupCol) {
     throw new RuntimeException("Not yet implemented")
   }
 }
