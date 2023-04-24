@@ -1,5 +1,6 @@
 package se.alipsa.groovy.gg
 
+import se.alipsa.groovy.datasets.Dataset
 import se.alipsa.groovy.gg.aes.Aes
 import se.alipsa.groovy.gg.coord.CoordFlip
 import se.alipsa.groovy.gg.geom.GeomAbline
@@ -142,10 +143,6 @@ class GgPlot {
     return new ScaleColorManual(mappings)
   }
 
-  static ScaleColorManual scale_color_manual(Map mappings) {
-    return scale_colour_manual(mappings)
-  }
-
   static StatBin2d stat_bin_2d() {
     return new StatBin2d()
   }
@@ -175,6 +172,9 @@ class GgPlot {
     static List factor(List column) {
       return ListConverter.toString(column)
     }
+  }
+  static Matrix map_data(String map, String region = null, boolean exact = false) {
+    return Dataset.mapData(map, region, exact)
   }
 
 }
