@@ -1,5 +1,6 @@
 package se.alipsa.groovy.gg
 
+import se.alipsa.groovy.datasets.Dataset
 import se.alipsa.groovy.gg.aes.Aes
 import se.alipsa.groovy.gg.geom.GeomAbline
 import se.alipsa.groovy.gg.geom.GeomBar
@@ -115,5 +116,8 @@ class GgPlot {
     return new StatCount()
   }
 
+  static Matrix map_data(String map, String region = null, boolean exact = false) {
+    return Dataset.mapData(map, region, exact)
+  }
 
 }
