@@ -79,10 +79,10 @@ class GgPlot {
 
   static CoordPolar coord_polar(Map params) {
     coord_polar(
-            params.getOrDefault('theta', 'x'),
-            params.getOrDefault('start', 0 as BigDecimal),
-            params.getOrDefault('direction', 1 as Integer),
-            params.getOrDefault('clip', 'on')
+            params.getOrDefault('theta', 'x') as String,
+            params.getOrDefault('start', 0) as BigDecimal,
+            params.getOrDefault('direction', 1) as Integer,
+            params.getOrDefault('clip', 'on') as String
     )
   }
 
