@@ -3,6 +3,7 @@ package se.alipsa.groovy.gg
 import se.alipsa.groovy.datasets.Dataset
 import se.alipsa.groovy.gg.aes.Aes
 import se.alipsa.groovy.gg.coord.CoordFlip
+import se.alipsa.groovy.gg.coord.CoordPolar
 import se.alipsa.groovy.gg.geom.GeomAbline
 import se.alipsa.groovy.gg.geom.GeomBar
 import se.alipsa.groovy.gg.geom.GeomBin2d
@@ -29,6 +30,7 @@ import se.alipsa.groovy.gg.stat.StatCount
 import se.alipsa.groovy.gg.stat.StatSum
 import se.alipsa.groovy.matrix.ListConverter
 import se.alipsa.groovy.matrix.Matrix
+import se.alipsa.groovy.matrix.ValueConverter
 
 /**
  * An api very similar to ggplot2 making ports from R code using ggplot2 simple.
@@ -63,12 +65,37 @@ class GgPlot {
     return new CoordFlip()
   }
 
+  /**
+   * @param theta: variable to map angle to (x or y)
+   * @param start: Offset of starting point from 12 o'clock in radians.
+   * Offset is applied clockwise or anticlockwise depending on value of direction.
+   * @param direction: 1, clockwise; -1, anticlockwise
+   * @param clip: Should drawing be clipped to the extent of the plot panel? A setting of "on"
+   * (the default) means yes, and a setting of "off" means no.
+   */
+  static CoordPolar coord_polar(String theta = "x", BigDecimal start = 0, Integer direction = 1, String clip = "on") {
+    return new CoordPolar(theta, start, 1 == direction, "on" == clip)
+  }
+
+  static CoordPolar coord_polar(Map params) {
+    coord_polar(
+            params.getOrDefault('theta', 'x'),
+            params.getOrDefault('start', 0 as BigDecimal),
+            params.getOrDefault('direction', 1 as Integer),
+            params.getOrDefault('clip', 'on')
+    )
+  }
+
   static GeomAbline geom_abline() {
     return new GeomAbline()
   }
 
   static GeomBar geom_bar() {
     return new GeomBar()
+  }
+
+  static GeomBar geom_bar(Map params) {
+    return new GeomBar(params)
   }
 
   static GeomBin2d geom_bin_2d() {
@@ -139,8 +166,12 @@ class GgPlot {
     return new GeomVline()
   }
 
-  static ScaleColorManual scale_colour_manual(Map mappings) {
+  static ScaleColorManual scale_color_manual(Map mappings) {
     return new ScaleColorManual(mappings)
+  }
+
+  static ScaleColorManual scale_colour_manual(Map mappings) {
+    return scale_color_manual(mappings)
   }
 
   static StatBin2d stat_bin_2d() {

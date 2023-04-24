@@ -52,7 +52,7 @@ dependencies {
   def groovy = "org.apache.groovy:groovy:$groovyVersion"
   // compile only dependencies are not included in the pom
   compileOnly groovy
-  implementation("se.alipsa.groovy:matrix:1.1.0")
+  implementation("se.alipsa.groovy:matrix:1.1.1-SNAPSHOT")
   implementation( 'se.alipsa.groovy:datasets:1.0.1-SNAPSHOT')
   compileOnly "org.openjfx:javafx-graphics:${javaFxVersion}:$qualifier"
   compileOnly "org.openjfx:javafx-base:${javaFxVersion}:$qualifier"

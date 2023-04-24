@@ -2,7 +2,7 @@ import se.alipsa.groovy.matrix.Stat
 
 import static org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import se.alipsa.groovy.matrixdata.Dataset
+import se.alipsa.groovy.datasets.Dataset
 import static se.alipsa.groovy.gg.GgPlot.*
 
 class GgPlotTest {
@@ -13,7 +13,7 @@ class GgPlotTest {
     @Test
     void testAes() {
         def a = aes(x:"Sepal Length", y:"Petal Length", col:"Species")
-        assertEquals('Aes(xCol=Sepal.Length, yCol=Petal.Length, colorCol=Species)', a.toString())
+        assertEquals('Aes(xCol=Sepal Length, yCol=Petal Length, colorCol=Species)', a.toString())
     }
     @Test
     void testPoint(){
@@ -80,7 +80,7 @@ class GgPlotTest {
     void testPieChart() {
         ggplot(mtcars, aes(x:"", y:"mpg", fill:"cyl")) \
             + geom_bar(stat:"identity", width:1) \
-            + coord_polar("y", start:0)
+            + coord_polar(theta: "y", start:0)
 
         //mtcars %>%
         //dplyr::group_by(cyl) %>%
