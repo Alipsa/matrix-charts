@@ -2,6 +2,7 @@ package se.alipsa.groovy.gg
 
 import se.alipsa.groovy.datasets.Dataset
 import se.alipsa.groovy.gg.aes.Aes
+import se.alipsa.groovy.gg.coord.CoordFlip
 import se.alipsa.groovy.gg.geom.GeomAbline
 import se.alipsa.groovy.gg.geom.GeomBar
 import se.alipsa.groovy.gg.geom.GeomBin2d
@@ -11,9 +12,13 @@ import se.alipsa.groovy.gg.geom.GeomCol
 import se.alipsa.groovy.gg.geom.GeomContour
 import se.alipsa.groovy.gg.geom.GeomContourFilled
 import se.alipsa.groovy.gg.geom.GeomCount
+import se.alipsa.groovy.gg.geom.GeomHistogram
 import se.alipsa.groovy.gg.geom.GeomHline
 import se.alipsa.groovy.gg.geom.GeomPoint
+import se.alipsa.groovy.gg.geom.GeomRug
 import se.alipsa.groovy.gg.geom.GeomSegment
+import se.alipsa.groovy.gg.geom.GeomSmooth
+import se.alipsa.groovy.gg.geom.GeomViolin
 import se.alipsa.groovy.gg.geom.GeomVline
 import se.alipsa.groovy.gg.scale.ScaleColorManual
 import se.alipsa.groovy.gg.stat.StatBin2d
@@ -21,6 +26,8 @@ import se.alipsa.groovy.gg.stat.StatBoxplot
 import se.alipsa.groovy.gg.stat.StatContour
 import se.alipsa.groovy.gg.stat.StatContourFilled
 import se.alipsa.groovy.gg.stat.StatCount
+import se.alipsa.groovy.gg.stat.StatSum
+import se.alipsa.groovy.matrix.ListConverter
 import se.alipsa.groovy.matrix.Matrix
 
 /**
@@ -32,12 +39,28 @@ class GgPlot {
     return new GgChart(data, aes)
   }
 
+  static Aes aes(Map params) {
+    def p = [:]
+    params.computeIfPresent('x', (k,v) -> p.xCol = v)
+    params.computeIfPresent('y', (k,v) -> p.yCol = v)
+    params.computeIfPresent('col', (k,v) -> p.colorCol = v)
+    return new Aes(p)
+  }
+
+  static Aes aes(String... colNames) {
+    return new Aes(Arrays.asList(colNames))
+  }
+
   static Aes aes(List<String> colNames) {
     return new Aes(colNames)
   }
 
   static Aes aes(List<String> colNames, String colour) {
     return new Aes(colNames, colour)
+  }
+
+  static CoordFlip coord_flip() {
+    return new CoordFlip()
   }
 
   static GeomAbline geom_abline() {
@@ -76,20 +99,44 @@ class GgPlot {
     return new GeomCount()
   }
 
-  static GeomHline geom_hline() {
-    return new GeomHline()
+  static GeomHistogram geom_histogram() {
+    return new GeomHistogram()
   }
 
-  static GeomVline geom_vline() {
-    return new GeomVline()
+  static GeomHline geom_hline() {
+    return new GeomHline()
   }
 
   static GeomPoint geom_point() {
     return new GeomPoint()
   }
 
+  static GeomPoint geom_point(Map params) {
+    return new GeomPoint(params)
+  }
+
+  static GeomRug geom_rug(Map params) {
+    return new GeomRug(params)
+  }
+
   static GeomSegment geom_segment() {
     return new GeomSegment()
+  }
+
+  static GeomSmooth geom_smooth() {
+    return new GeomSmooth()
+  }
+
+  static GeomSmooth geom_smooth(Map params) {
+    return new GeomSmooth(params)
+  }
+
+  static GeomViolin geom_violin(Aes aes) {
+    return new GeomViolin(aes)
+  }
+
+  static GeomVline geom_vline() {
+    return new GeomVline()
   }
 
   static ScaleColorManual scale_colour_manual(Map mappings) {
@@ -116,6 +163,16 @@ class GgPlot {
     return new StatCount()
   }
 
+  static StatSum stat_summary(Map params) {
+    return new StatSum(params)
+  }
+
+  static class As {
+
+    static List factor(List column) {
+      return ListConverter.toString(column)
+    }
+  }
   static Matrix map_data(String map, String region = null, boolean exact = false) {
     return Dataset.mapData(map, region, exact)
   }

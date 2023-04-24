@@ -1,14 +1,14 @@
 package se.alipsa.groovy.gg.geom
 
-class GeomPoint extends Geom {
+class GeomSmooth extends Geom {
 
     String color
 
-    GeomPoint() {
+    GeomSmooth() {
 
     }
 
-    GeomPoint(Map params) {
+    GeomSmooth(Map params) {
         color = params.color
     }
 }
