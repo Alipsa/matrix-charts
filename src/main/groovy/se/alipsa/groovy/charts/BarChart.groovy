@@ -63,7 +63,7 @@ class BarChart extends Chart {
    *     "Sum [Fatalities]",
    *   )
    */
-  static BarChart createVertical(String title, Matrix data, String categoryColumnName, ChartType chartType, String... valueColumn) {
+  static BarChart createVertical(String title, Matrix data, String categoryColumnName, ChartType chartType = ChartType.NONE, String... valueColumn) {
     return create(title, chartType, data, categoryColumnName, ChartDirection.VERTICAL, valueColumn)
   }
 }

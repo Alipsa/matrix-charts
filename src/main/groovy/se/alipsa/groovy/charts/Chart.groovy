@@ -16,8 +16,11 @@ abstract class Chart {
   protected String xAxisTitle = ""
   protected String yAxisTitle = ""
 
-  protected List<?> categorySeries;
-  protected List<?>[] valueSeries;
+  protected List<?> categorySeries
+  protected List<?>[] valueSeries
+
+  protected AxisScale xAxisScale = null
+  protected AxisScale yAxisScale = null
 
   String getTitle() {
     return title;
@@ -72,6 +75,30 @@ abstract class Chart {
 
   String getyAxisTitle() {
     return yAxisTitle
+  }
+
+  AxisScale getxAxisScale() {
+    return xAxisScale
+  }
+
+  void setxAxisScale(AxisScale xAxisScale) {
+    this.xAxisScale = xAxisScale
+  }
+
+  void setxAxisScale(BigDecimal start, BigDecimal end, BigDecimal step) {
+    this.xAxisScale = new AxisScale(start, end, step)
+  }
+
+  AxisScale getyAxisScale() {
+    return yAxisScale
+  }
+
+  void setyAxisScale(AxisScale yAxisScale) {
+    this.yAxisScale = yAxisScale
+  }
+
+  void setyAxisScale(BigDecimal start, BigDecimal end, BigDecimal step) {
+    this.yAxisScale = new AxisScale(start, end, step)
   }
 
   @Override

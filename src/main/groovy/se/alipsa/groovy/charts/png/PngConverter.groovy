@@ -17,7 +17,7 @@ class PngConverter {
      * This implementation uses java fx to render the chart and take a snapshot image
      *
      * @param chart the chart to convert
-     * @param out the outputstream to save to
+     * @param out the output stream to save to
      * @param width the width of the png
      * @param height the height of the png
      * @throws IOException if an error occurs during writing
